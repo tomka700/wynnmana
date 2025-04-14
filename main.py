@@ -16,10 +16,7 @@ cps = float(input("cps: "))
 mr = float(input("mr: ")) + 25
 ms = float(input("ms: "))
 # make list of costs and spells
-for i in range(len(cycle)):
-    for j in range(4):
-        if cycle[i] == j + 1:
-            cycle[i] = [cost[j], j + 1]
+cycle = [[cost[spell - 1], spell] for spell in cycle]
 # shift cost cycle so that first != last
 while cycle[0][1] == cycle[-1][1]:
     cycle = [cycle[-1]] + cycle[:-1]
@@ -28,7 +25,6 @@ for i in range(2):
     cycle_cost.append(max(1, cycle[i][0]))
 # add amount of repeat times 5 to cost if previous 2 repeated
 for i in range(2, len(cycle)):
-    # If the previous two elements have the same label, increment the repeat counter.
     if cycle[i - 1][1] == cycle[i - 2][1]:
         repeat += 1
     else:
