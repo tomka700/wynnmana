@@ -31,7 +31,7 @@ for i in range(2, len(cycle)):
         repeat = 0
     cycle_cost.append(max(1, cycle[i][1] + repeat * 5))
 # add repeat cost to first if cycle ended with a repeat and if it would go over 1
-if (cycle[-1][0] == cycle[-2][0]) & (cycle[0][1] + repeat * 5 > 1):
+if (cycle[-1][0] == cycle[-2][0]) and (cycle[0][1] + repeat * 5 > 1):
     cycle_cost[0] += repeat * 5
 # sustain - cps * average cost / 3
 print("mana / s: {0}".format(mr / 5 + ms / 3 - cps * sum(cycle_cost) / len(cycle_cost) / 3))
