@@ -1,11 +1,10 @@
 cost, cycle, cycle_cost = [], [], []
-j = 1
-spell = 1
-repeat = 0
 # spell cost input
 for i in range(4):
     cost.append(float(input("{0}. spell cost: ".format(i + 1))))
 # spell cycle input, input to exit cycle isn't counted
+spell = 1
+j = 1
 while 0 < spell < 5:
     spell = int(input("{0}. spell: ".format(j)))
     cycle.append(spell)
@@ -24,6 +23,7 @@ while cycle[0][0] == cycle[-1][0]:
 for i in range(2):
     cycle_cost.append(max(1, cycle[i][1]))
 # add amount of repeat times 5 to cost if previous 2 repeated
+repeat = 0
 for i in range(2, len(cycle)):
     if cycle[i - 1][0] == cycle[i - 2][0]:
         repeat += 1
