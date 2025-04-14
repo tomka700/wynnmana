@@ -16,22 +16,22 @@ cps = float(input("cps: "))
 mr = float(input("mr: ")) + 25
 ms = float(input("ms: "))
 # make list of costs and spells
-cycle = [[cost[spell - 1], spell] for spell in cycle]
+cycle = [spell, [cost[spell - 1]] for spell in cycle]
 # shift cost cycle so that first != last
-while cycle[0][1] == cycle[-1][1]:
+while cycle[0][0] == cycle[-1][0]:
     cycle = [cycle[-1]] + cycle[:-1]
 # first two elements are added to avoid out of range error
 for i in range(2):
-    cycle_cost.append(max(1, cycle[i][0]))
+    cycle_cost.append(max(1, cycle[i][1]))
 # add amount of repeat times 5 to cost if previous 2 repeated
 for i in range(2, len(cycle)):
-    if cycle[i - 1][1] == cycle[i - 2][1]:
+    if cycle[i - 1][0] == cycle[i - 2][0]:
         repeat += 1
     else:
         repeat = 0
-    cycle_cost.append(max(1, cycle[i][0] + repeat * 5))
+    cycle_cost.append(max(1, cycle[i][1] + repeat * 5))
 # add repeat cost to first if cycle ended with a repeat and if it would go over 1
-if (cycle[-1][1] == cycle[-2][1]) & (cycle[0][0] + repeat * 5 > 1):
+if (cycle[-1][0] == cycle[-2][0]) & (cycle[0][1] + repeat * 5 > 1):
     cycle_cost[0] += repeat * 5
 # sustain - cps * average cost / 3
 print("mana / s: {0}".format(mr / 5 + ms / 3 - cps * sum(cycle_cost) / len(cycle_cost) / 3))
