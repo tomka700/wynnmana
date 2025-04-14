@@ -25,24 +25,15 @@ while cycle[0][1] == cycle[-1][1]:
     cycle = [cycle[-1]] + cycle[:-1]
 # first two elements are added to avoid out of range error
 for i in range(2):
-    if cycle[i][0] <= 1:
-        cycle_cost.append(1)
-    else:
-        cycle_cost.append(cycle[i][0])
+    cycle_cost.append(max(1, cycle[i][0]))
 # add amount of repeat times 5 to cost if previous 2 repeated
 for i in range(2, len(cycle)):
+    # If the previous two elements have the same label, increment the repeat counter.
     if cycle[i - 1][1] == cycle[i - 2][1]:
         repeat += 1
-        if cycle[i][0] + repeat * 5 <= 1:
-            cycle_cost[i].append(1)
-        else:
-            cycle_cost.append(cycle[i][0] + repeat * 5)
     else:
         repeat = 0
-        if cycle[i][0] <= 1:
-            cycle_cost[i].append(1)
-        else:
-            cycle_cost.append(cycle[i][0])
+    cycle_cost.append(max(1, cycle[i][0] + repeat * 5))
 # add repeat cost to first if cycle ended with a repeat and if it would go over 1
 if (cycle[-1][1] == cycle[-2][1]) & (cycle[0][0] + repeat * 5 > 1):
     cycle_cost[0] += repeat * 5
