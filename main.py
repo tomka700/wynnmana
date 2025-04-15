@@ -1,12 +1,12 @@
 cost, cycle, cycle_cost = [], [], []
 # spell cost input
 for i in range(4):
-    cost.append(float(input("{0}. spell cost: ".format(i + 1))))
+    cost.append(float(input(f"{i+1}. spell cost: ")))
 # spell cycle input, input to exit cycle isn't counted
 spell = 1
 j = 1
 while 0 < spell < 5:
-    spell = int(input("{0}. spell: ".format(j)))
+    spell = int(input(f"{j}. spell: "))
     cycle.append(spell)
     j += 1
 cycle.pop()
@@ -15,7 +15,7 @@ cps = float(input("cps: "))
 mr = float(input("mr: ")) + 25
 ms = float(input("ms: "))
 # make list of costs and spells
-cycle = [spell, [cost[spell - 1]] for spell in cycle]
+cycle = [[spell, cost[spell - 1]] for spell in cycle]
 # shift cost cycle so that first != last
 while cycle[0][0] == cycle[-1][0]:
     cycle = [cycle[-1]] + cycle[:-1]
